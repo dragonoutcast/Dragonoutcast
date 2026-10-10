@@ -27,8 +27,8 @@ jobs:
       - name: Blokada pionu
         run: sed -i '0,/<activity/s//<activity android:screenOrientation="portrait"/' android/app/src/main/AndroidManifest.xml
       - name: Ikona (opcjonalna)
-        if: ${{ hashFiles('app/assets/icon-only.png') != '' }}
-        run: npx @capacitor/assets generate --android --iconBackgroundColor '#1b1230' --iconBackgroundColorDark '#1b1230'
+        if: ${{ hashFiles('app/assets/ikona-nowa-1024.png') != '' }}
+        run: cp assets/ikona-nowa-1024.png assets/icon-only.png && npx @capacitor/assets generate --android --iconBackgroundColor '#1b1230' --iconBackgroundColorDark '#1b1230'
       - name: Synchronizacja
         run: npx cap sync android
       - name: Budowa APK
