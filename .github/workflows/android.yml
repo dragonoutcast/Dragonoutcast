@@ -28,7 +28,7 @@ jobs:
         run: sed -i '0,/<activity/s//<activity android:screenOrientation="portrait"/' android/app/src/main/AndroidManifest.xml
       - name: Ikona (opcjonalna)
         if: ${{ hashFiles('app/assets/ikona-nowa-1024.png') != '' }}
-        run: cp assets/ikona-nowa-1024.png assets/icon-only.png && convert assets/icon-only.png -resize 680x680 -background none -gravity center -extent 1024x1024 assets/icon-foreground.png && npx @capacitor/assets generate --android --iconBackgroundColor '#160527' --iconBackgroundColorDark '#160527'
+        run: cp assets/ikona-nowa-1024.png assets/icon-only.png && (magick assets/icon-only.png -resize 680x680 -background none -gravity center -extent 1024x1024 assets/icon-foreground.png || convert assets/icon-only.png -resize 680x680 -background none -gravity center -extent 1024x1024 assets/icon-foreground.png) && npx @capacitor/assets generate --android --iconBackgroundColor '#160527' --iconBackgroundColorDark '#160527'
       - name: Synchronizacja
         run: npx cap sync android
       - name: Budowa APK
